@@ -7,6 +7,7 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+			"./1777045402143926151.html"
 	],
 	prefix: "",
 	theme: {
@@ -88,7 +89,24 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in-up': 'fadeInUp 0.4s ease forwards',
+				'pulse-glow': 'pulseGlow 2s ease infinite',
+				'slide-in-left': 'slideInLeft 0.3s ease forwards',
+				'float': 'float 3s ease-in-out infinite',
+			},
+			fontFamily: {
+				rajdhani: ['Rajdhani', 'sans-serif'],
+				rubik: ['Rubik', 'sans-serif'],
+			},
+			colors: {
+				neon: {
+					cyan: '#00d4ff',
+					purple: '#a855f7',
+					green: '#22c55e',
+					orange: '#f97316',
+					pink: '#ec4899',
+				}
 			}
 		}
 	},
