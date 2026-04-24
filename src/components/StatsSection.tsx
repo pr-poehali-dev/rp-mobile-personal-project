@@ -1,18 +1,46 @@
 import Icon from "@/components/ui/icon";
 
 const stats = [
-  { label: "Онлайн игроков", value: "247", icon: "Users", color: "cyan", delta: "+12" },
-  { label: "Активных фракций", value: "18", icon: "Shield", color: "purple", delta: "+2" },
-  { label: "Донатов сегодня", value: "₽84,200", icon: "DollarSign", color: "green", delta: "+18%" },
-  { label: "Военных билетов", value: "1,340", icon: "FileText", color: "orange", delta: "+34" },
+  { label: "Онлайн игроков", value: "559", icon: "Users", color: "cyan", delta: "+31" },
+  { label: "Активных фракций", value: "24", icon: "Shield", color: "purple", delta: "+3" },
+  { label: "Донатов сегодня", value: "₽142,800", icon: "DollarSign", color: "green", delta: "+22%" },
+  { label: "Военных билетов", value: "3,140", icon: "FileText", color: "orange", delta: "+87" },
+];
+
+const servers = [
+  {
+    name: "Сервер #1 — Дубай",
+    icon: "🌴",
+    online: 247,
+    color: "from-amber-500/20 to-yellow-500/20",
+    border: "border-amber-500/30",
+    tag: "Флагман",
+  },
+  {
+    name: "Сервер #2 — Алматы",
+    icon: "🏔️",
+    online: 183,
+    color: "from-blue-500/20 to-cyan-500/20",
+    border: "border-blue-500/30",
+    tag: "Новый",
+  },
+  {
+    name: "Сервер #3 — Тольятти",
+    icon: "🏭",
+    online: 129,
+    color: "from-slate-500/20 to-gray-500/20",
+    border: "border-slate-500/30",
+    tag: "",
+  },
 ];
 
 const cities = [
   { name: "Москва / Кремль", players: 89, icon: "🏛️", color: "from-yellow-500/20 to-orange-500/20", border: "border-yellow-500/20" },
-  { name: "Арзамас", players: 43, icon: "🏙️", color: "from-blue-500/20 to-cyan-500/20", border: "border-blue-500/20" },
+  { name: "Дубай", players: 72, icon: "🌴", color: "from-amber-500/20 to-yellow-500/20", border: "border-amber-500/20" },
+  { name: "Алматы", players: 58, icon: "🏔️", color: "from-blue-500/20 to-cyan-500/20", border: "border-blue-500/20" },
+  { name: "Тольятти", players: 47, icon: "🏭", color: "from-slate-500/20 to-gray-500/20", border: "border-slate-500/20" },
+  { name: "Арзамас", players: 43, icon: "🏙️", color: "from-indigo-500/20 to-purple-500/20", border: "border-indigo-500/20" },
   { name: "Лыткарино", players: 31, icon: "🌆", color: "from-green-500/20 to-teal-500/20", border: "border-green-500/20" },
-  { name: "Дубай", players: 57, icon: "🌴", color: "from-amber-500/20 to-yellow-500/20", border: "border-amber-500/20" },
-  { name: "Тольятти", players: 27, icon: "🏭", color: "from-slate-500/20 to-gray-500/20", border: "border-slate-500/20" },
 ];
 
 const colorMap: Record<string, string> = {
@@ -26,8 +54,28 @@ export default function StatsSection() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-rajdhani font-bold text-2xl text-white tracking-wide">Статистика сервера</h2>
-        <p className="text-white/40 text-sm font-rubik mt-1">Актуальные данные в реальном времени</p>
+        <h2 className="font-rajdhani font-bold text-2xl text-white tracking-wide">Статистика серверов</h2>
+        <p className="text-white/40 text-sm font-rubik mt-1">3 сервера открыты · Актуальные данные в реальном времени</p>
+      </div>
+
+      {/* Servers status */}
+      <div className="grid grid-cols-3 gap-3">
+        {servers.map((srv) => (
+          <div key={srv.name} className={`rounded-xl border ${srv.border} bg-gradient-to-br ${srv.color} p-4`}>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">{srv.icon}</span>
+                <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              </div>
+              {srv.tag && (
+                <span className="text-xs font-rubik text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-full">{srv.tag}</span>
+              )}
+            </div>
+            <div className="font-rajdhani font-bold text-white text-base leading-tight">{srv.name}</div>
+            <div className="font-rajdhani font-bold text-2xl text-white mt-1">{srv.online}</div>
+            <div className="text-white/40 text-xs font-rubik">игроков онлайн</div>
+          </div>
+        ))}
       </div>
 
       {/* Stat Cards */}
@@ -81,11 +129,12 @@ export default function StatsSection() {
         <h3 className="font-rajdhani font-semibold text-lg text-white/80 mb-3 tracking-wide">Последние события</h3>
         <div className="space-y-2">
           {[
-            { text: "Игрок Volkov_23 получил военный билет", time: "1 мин назад", icon: "FileText", color: "text-cyan-400" },
-            { text: "Новый донат: VIP Premium — ₽2,500", time: "3 мин назад", icon: "DollarSign", color: "text-green-400" },
-            { text: "ОПГ «Северные» набрала 5 новых бойцов", time: "7 мин назад", icon: "Users", color: "text-purple-400" },
-            { text: "Правительство Арзамаса сменило Мэра", time: "15 мин назад", icon: "Shield", color: "text-orange-400" },
-            { text: "Военная часть провела учения в Тольятти", time: "28 мин назад", icon: "Swords", color: "text-red-400" },
+            { text: "Сервер #2 Алматы — открыт! Первые игроки получают двойной опыт", time: "1 мин назад", icon: "Star", color: "text-cyan-400" },
+            { text: "Игрок Sheikh_R получил военный билет на сервере Дубай", time: "4 мин назад", icon: "FileText", color: "text-amber-400" },
+            { text: "Новый донат: VIP Platinum — ₽2,999 (Алматы)", time: "9 мин назад", icon: "DollarSign", color: "text-green-400" },
+            { text: "ОПГ «Северные» захватила район в Тольятти", time: "15 мин назад", icon: "Users", color: "text-purple-400" },
+            { text: "Правительство Дубая назначило нового Мэра", time: "22 мин назад", icon: "Shield", color: "text-yellow-400" },
+            { text: "Военная часть провела учения в Алматы", time: "41 мин назад", icon: "Swords", color: "text-red-400" },
           ].map((ev, i) => (
             <div key={i} className="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white/3 border border-white/5 hover:bg-white/5 transition-colors">
               <Icon name={ev.icon} fallback="Circle" size={14} className={ev.color} />

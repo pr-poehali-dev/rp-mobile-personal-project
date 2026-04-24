@@ -94,9 +94,16 @@ export default function Sidebar({ activeSection, onSectionChange, user }: Sideba
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-white text-xs font-medium truncate font-rubik">{user.name}</p>
-            <span className={`text-xs font-rubik ${roleColors[user.role]}`}>
-              {roleLabels[user.role]}
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className={`text-xs font-rubik ${roleColors[user.role]}`}>
+                {roleLabels[user.role]}
+              </span>
+              {user.server && (
+                <span className="text-white/25 text-xs font-rubik">
+                  · {user.server === "dubai" ? "🌴" : user.server === "almaty" ? "🏔️" : "🏭"}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>

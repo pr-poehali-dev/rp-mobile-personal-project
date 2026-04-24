@@ -16,19 +16,21 @@ export interface AdminUser {
   avatar: string;
   online: boolean;
   fraction?: string;
+  server?: string;
 }
 
 export default function Index() {
   const [user, setUser] = useState<AdminUser | null>(null);
   const [activeSection, setActiveSection] = useState<Section>("stats");
 
-  const handleLogin = (name: string, fraction: string) => {
+  const handleLogin = (name: string, fraction: string, server: string) => {
     setUser({
       name,
       role: "moderator",
       avatar: name.slice(0, 2).toUpperCase(),
       online: true,
       fraction,
+      server,
     });
   };
 
