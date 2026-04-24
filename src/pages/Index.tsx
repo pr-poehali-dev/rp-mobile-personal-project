@@ -5,6 +5,7 @@ import StatsSection from "@/components/StatsSection";
 import DonatesSection from "@/components/DonatesSection";
 import SettingsSection from "@/components/SettingsSection";
 import ProfileSection from "@/components/ProfileSection";
+import LoginScreen from "@/components/LoginScreen";
 
 export type Section = "teams" | "stats" | "donates" | "settings" | "profile";
 export type AccessLevel = "owner" | "admin" | "moderator";
@@ -14,17 +15,26 @@ export interface AdminUser {
   role: AccessLevel;
   avatar: string;
   online: boolean;
+  fraction?: string;
 }
 
-const currentUser: AdminUser = {
-  name: "Alexander_Volkov",
-  role: "owner",
-  avatar: "AV",
-  online: true,
-};
-
 export default function Index() {
+  const [user, setUser] = useState<AdminUser | null>(null);
   const [activeSection, setActiveSection] = useState<Section>("stats");
+
+  const handleLogin = (name: string, fraction: string) => {
+    setUser({
+      name,
+      role: "moderator",
+      avatar: name.slice(0, 2).toUpperCase(),
+      online: true,
+      fraction,
+    });
+  };
+
+  if (!user) {
+    return <LoginScreen onLogin={handleLogin} />;
+  }
 
   const renderSection = () => {
     switch (activeSection) {
@@ -32,7 +42,7 @@ export default function Index() {
       case "stats": return <StatsSection />;
       case "donates": return <DonatesSection />;
       case "settings": return <SettingsSection />;
-      case "profile": return <ProfileSection user={currentUser} />;
+      case "profile": return <ProfileSection user={user} />;
       default: return <StatsSection />;
     }
   };
@@ -45,7 +55,7 @@ export default function Index() {
       <Sidebar
         activeSection={activeSection}
         onSectionChange={setActiveSection}
-        user={currentUser}
+        user={user}
       />
 
       <main className="flex-1 overflow-auto">
