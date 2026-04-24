@@ -51,10 +51,11 @@ function getRestartInfo(now: Date): { isRestart: boolean; nextRestart: string; c
 
 interface GameBarProps {
   balance: number;
+  lams: number;
   onAchievementClaim: (reward: number) => void;
 }
 
-export default function GameBar({ balance, onAchievementClaim }: GameBarProps) {
+export default function GameBar({ balance, lams, onAchievementClaim }: GameBarProps) {
   const [now, setNow] = useState(new Date());
   const [showAchievements, setShowAchievements] = useState(false);
   const [claimed, setClaimed] = useState<Set<string>>(new Set());
@@ -191,7 +192,17 @@ export default function GameBar({ balance, onAchievementClaim }: GameBarProps) {
             </div>
           </button>
 
-          <div className="ml-auto flex items-center gap-3">
+          <div className="ml-auto flex items-center gap-2">
+            {/* Lams */}
+            <div className="flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-lg px-3 py-1.5">
+              <span className="text-sm">🐑</span>
+              <div>
+                <div className="text-white/30 text-xs font-rubik leading-none">Ламы</div>
+                <div className="font-rajdhani font-bold text-yellow-400 text-sm leading-none">
+                  {lams.toLocaleString("ru-RU")}
+                </div>
+              </div>
+            </div>
             {/* Balance */}
             <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-lg px-3 py-1.5">
               <Icon name="DollarSign" fallback="Circle" size={13} className="text-green-400" />

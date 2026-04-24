@@ -26,6 +26,7 @@ const STORAGE_KEY = "rpmobile_player";
 
 interface PlayerState {
   balance: number;
+  lams: number;
   level: number;
   xp: number;
   hoursPlayed: number;
@@ -38,7 +39,7 @@ function loadState(name: string): PlayerState {
   } catch (e) {
     console.warn("Load state error", e);
   }
-  return { balance: 200_000_000_000, level: 1, xp: 0, hoursPlayed: 347 };
+  return { balance: 200_000_000_000, lams: 5000, level: 1, xp: 0, hoursPlayed: 347 };
 }
 
 function saveState(name: string, state: PlayerState) {
@@ -54,6 +55,7 @@ export default function Index() {
   const [activeSection, setActiveSection] = useState<Section>("stats");
   const [playerState, setPlayerState] = useState<PlayerState>({
     balance: 200_000_000_000,
+    lams: 5000,
     level: 1,
     xp: 0,
     hoursPlayed: 347,
@@ -99,6 +101,10 @@ export default function Index() {
     setPlayerState(prev => ({ ...prev, balance: Math.max(0, prev.balance - amount) }));
   };
 
+  const spendLams = (amount: number) => {
+    setPlayerState(prev => ({ ...prev, lams: Math.max(0, prev.lams - amount) }));
+  };
+
   const addXp = (amount: number) => {
     setPlayerState(prev => {
       const newXp = prev.xp + amount;
@@ -119,7 +125,7 @@ export default function Index() {
       case "teams":    return <TeamsSection />;
       case "stats":    return <StatsSection />;
       case "donates":  return <DonatesSection />;
-      case "shop":     return <ShopSection balance={playerState.balance} onBuy={(price) => { spendBalance(price); addXp(50); }} />;
+      case "shop":     return <ShopSection balance={playerState.balance} lams={playerState.lams} onBuyRub={(price) => { spendBalance(price); addXp(50); }} onBuyLam={(price) => { spendLams(price); addXp(100); }} />;
       case "promo":    return <PromoSection balance={playerState.balance} onPromo={(amt) => addBalance(amt)} />;
       case "settings": return <SettingsSection />;
       case "profile":  return <ProfileSection user={user} balance={playerState.balance} level={playerState.level} xp={playerState.xp} hoursPlayed={playerState.hoursPlayed} />;
@@ -147,6 +153,7 @@ export default function Index() {
 
       <GameBar
         balance={playerState.balance}
+        lams={playerState.lams}
         onAchievementClaim={(reward) => addBalance(reward)}
       />
     </div>
