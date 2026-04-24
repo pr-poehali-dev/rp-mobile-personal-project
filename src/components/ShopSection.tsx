@@ -40,7 +40,7 @@ const FILTERS = [
 
 interface ShopSectionProps {
   balance: number;
-  onBuy: (price: number, name: string) => void;
+  onBuy: (price: number) => void;
 }
 
 export default function ShopSection({ balance, onBuy }: ShopSectionProps) {
@@ -58,7 +58,7 @@ export default function ShopSection({ balance, onBuy }: ShopSectionProps) {
       return;
     }
     setBought(prev => new Set(prev).add(item.id));
-    onBuy(item.price, item.name);
+    onBuy(item.price);
     setToast(`Куплено: ${item.name}!`);
     setTimeout(() => setToast(null), 2500);
   };

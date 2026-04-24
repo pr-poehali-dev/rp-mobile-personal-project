@@ -119,8 +119,8 @@ export default function Index() {
       case "teams":    return <TeamsSection />;
       case "stats":    return <StatsSection />;
       case "donates":  return <DonatesSection />;
-      case "shop":     return <ShopSection balance={playerState.balance} onBuy={(price, _name) => { spendBalance(price); addXp(50); }} />;
-      case "promo":    return <PromoSection balance={playerState.balance} onPromo={(amt, _code) => addBalance(amt)} />;
+      case "shop":     return <ShopSection balance={playerState.balance} onBuy={(price) => { spendBalance(price); addXp(50); }} />;
+      case "promo":    return <PromoSection balance={playerState.balance} onPromo={(amt) => addBalance(amt)} />;
       case "settings": return <SettingsSection />;
       case "profile":  return <ProfileSection user={user} balance={playerState.balance} level={playerState.level} xp={playerState.xp} hoursPlayed={playerState.hoursPlayed} />;
       default:         return <StatsSection />;

@@ -13,7 +13,7 @@ const VALID_CODES: Record<string, { reward: number; desc: string; used?: boolean
 
 interface PromoSectionProps {
   balance: number;
-  onPromo: (amount: number, code: string) => void;
+  onPromo: (amount: number) => void;
 }
 
 export default function PromoSection({ balance, onPromo }: PromoSectionProps) {
@@ -43,7 +43,7 @@ export default function PromoSection({ balance, onPromo }: PromoSectionProps) {
     setUsedCodes(prev => new Set(prev).add(upper));
     setLastReward(promo.reward);
     setStatus("success");
-    onPromo(promo.reward, upper);
+    onPromo(promo.reward);
     setHistory(prev => [{
       code: upper,
       reward: promo.reward,

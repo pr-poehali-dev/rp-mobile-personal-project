@@ -2,7 +2,7 @@ import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
 interface LoginScreenProps {
-  onLogin: (name: string, role: string, server: string) => void;
+  onLogin: (name: string, fraction: string, server: string) => void;
 }
 
 const servers = [
