@@ -129,7 +129,7 @@ export default function GameBar({ balance, lams, onAchievementClaim }: GameBarPr
       )}
 
       {/* Bottom bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 h-14 border-t border-white/5 bg-black/70 backdrop-blur-xl">
+      <div className="h-14 border-t border-white/5 bg-black/70 backdrop-blur-xl relative shrink-0">
         {/* Sky gradient strip */}
         <div className={`absolute inset-0 bg-gradient-to-r ${tod.sky} opacity-60 pointer-events-none`} />
 

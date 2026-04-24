@@ -134,22 +134,24 @@ export default function Index() {
   };
 
   return (
-    <div className="flex bg-background cyber-grid overflow-hidden relative" style={{ height: "calc(100vh - 56px)" }}>
-      <div className="absolute top-0 left-64 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+    <div className="flex flex-col bg-background cyber-grid" style={{ height: "100dvh" }}>
+      <div className="flex flex-1 overflow-hidden relative">
+        <div className="absolute top-0 left-64 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <Sidebar
-        activeSection={activeSection}
-        onSectionChange={setActiveSection}
-        user={user}
-        balance={playerState.balance}
-      />
+        <Sidebar
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+          user={user}
+          balance={playerState.balance}
+        />
 
-      <main className="flex-1 overflow-auto">
-        <div key={activeSection} className="animate-fade-in-up p-6 h-full">
-          {renderSection()}
-        </div>
-      </main>
+        <main className="flex-1 overflow-auto">
+          <div key={activeSection} className="animate-fade-in-up p-6">
+            {renderSection()}
+          </div>
+        </main>
+      </div>
 
       <GameBar
         balance={playerState.balance}
